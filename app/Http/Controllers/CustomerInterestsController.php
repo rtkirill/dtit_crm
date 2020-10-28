@@ -10,76 +10,54 @@ class CustomerInterestsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json(CustomerInterests::orderBy('created_at', 'desc')->get());
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
-    }
+        try {
+            $customerInterests = new CustomerInterests($request->validate([
+                "interest" => "required",
+                "customer_id" => "required"
+            ]));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CustomerInterests  $customerInterests
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CustomerInterests $customerInterests)
-    {
-        //
-    }
+            $customerInterests->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CustomerInterests  $customerInterests
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CustomerInterests $customerInterests)
-    {
-        //
+            return response()->json($request);
+
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CustomerInterests  $customerInterests
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\CustomerInterests $interest
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, CustomerInterests $customerInterests)
+    public function update(Request $request, CustomerInterests $interest)
     {
-        //
-    }
+        try {
+            $interest->update($request->validate([
+                "interest" => "required",
+                "customer_id" => "required"
+            ]));
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CustomerInterests  $customerInterests
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CustomerInterests $customerInterests)
-    {
-        //
+            return response()->json($interest);
+        } catch (\Exception $e) {
+            return response()->json($e);
+        }
     }
 }

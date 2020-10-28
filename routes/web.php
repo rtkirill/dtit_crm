@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('customer.index');
+});
+
+Route::get('/edit/{customer}', function ($customer_id) {
+    return view('customer.edit', ['customer_id' => $customer_id]);
+});
+
+Route::get('/new-customer', function () {
+    return view('customer.create');
 });
