@@ -2217,7 +2217,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         comment: this.customers[index].comment.comment,
         customer_id: this.customers[index]["id"]
       }).then(function () {
-        alert("comment was added!");
+        location.reload();
       });
     },
     makeUpdateComment: function makeUpdateComment(index) {

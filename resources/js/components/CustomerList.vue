@@ -167,7 +167,7 @@
                     comment: this.customers[index].comment.comment,
                     customer_id: this.customers[index]["id"]
                 }).then(() => {
-                    alert("comment was added!");
+                    location.reload();
                 });
             },
 
