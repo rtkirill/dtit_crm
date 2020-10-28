@@ -15,7 +15,13 @@ class CreateStatusCommentsTable extends Migration
     {
         Schema::create('status_comments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->bigInteger("customer_id");
+            $table->text("comment");
+
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers')
+                ->onDelete('cascade');
         });
     }
 

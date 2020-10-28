@@ -15,7 +15,14 @@ class CreateCustomerInterestsTable extends Migration
     {
         Schema::create('customer_interests', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger("customer_id");
+            $table->text("interest");
             $table->timestamps();
+
+            $table->foreign('customer_id')
+                ->references('id')
+                ->on('customers')
+                ->onDelete('cascade');
         });
     }
 

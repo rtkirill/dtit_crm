@@ -15,7 +15,7 @@ class CreateInterestStatusesTable extends Migration
     {
         Schema::create('interest_statuses', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string("status");
         });
     }
 
